@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUser, createGuess, setUserActiveGuess } from '@/lib/dynamodb';
-import { getBitcoinPrice } from '@/lib/binance';
+import { getBitcoinPrice } from '@/lib/coinbase';
 
 /**
  * POST /api/guess

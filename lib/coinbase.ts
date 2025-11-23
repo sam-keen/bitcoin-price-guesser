@@ -1,6 +1,7 @@
-// Binance API helper with 5-second cache
+// Bitcoin price API helper with 5-second cache
+// Uses Coinbase API (no geo-restrictions, generous rate limits)
 
-const BINANCE_API = 'https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT';
+const COINBASE_API = 'https://api.coinbase.com/v2/prices/BTC-USD/spot';
 const CACHE_DURATION_MS = 5000; // 5 seconds
 
 interface PriceData {
@@ -12,7 +13,7 @@ interface PriceData {
 let cachedPrice: PriceData | null = null;
 
 /**
- * Fetch current Bitcoin price in USD from Binance
+ * Fetch current Bitcoin price in USD from Coinbase
  * Results are cached for 5 seconds
  */
 export async function getBitcoinPrice(): Promise<PriceData> {
@@ -24,27 +25,27 @@ export async function getBitcoinPrice(): Promise<PriceData> {
   }
 
   try {
-    const response = await fetch(BINANCE_API, {
+    const response = await fetch(COINBASE_API, {
       headers: {
         'Accept': 'application/json',
       },
     });
 
     if (!response.ok) {
-      throw new Error(`Binance API error: ${response.status} ${response.statusText}`);
+      throw new Error(`Coinbase API error: ${response.status} ${response.statusText}`);
     }
 
     const data = await response.json();
-    const priceString = data.price;
+    const priceString = data?.data?.amount;
 
     if (typeof priceString !== 'string') {
-      throw new Error('Invalid price data from Binance');
+      throw new Error('Invalid price data from Coinbase');
     }
 
     const price = parseFloat(priceString);
 
     if (isNaN(price)) {
-      throw new Error('Failed to parse price from Binance');
+      throw new Error('Failed to parse price from Coinbase');
     }
 
     // Update cache
@@ -57,7 +58,7 @@ export async function getBitcoinPrice(): Promise<PriceData> {
   } catch (error) {
     // If we have a cached price (even if stale), return it as fallback
     if (cachedPrice) {
-      console.warn('Binance API error, returning stale cached price:', error);
+      console.warn('Coinbase API error, returning stale cached price:', error);
       return cachedPrice;
     }
 

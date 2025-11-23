@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getBitcoinPrice } from '@/lib/binance';
+import { getBitcoinPrice } from '@/lib/coinbase';
 
 /**
  * GET /api/price

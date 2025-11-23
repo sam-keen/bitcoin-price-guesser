@@ -6,7 +6,7 @@ import {
   updateUserScore,
   clearUserActiveGuess,
 } from '@/lib/dynamodb';
-import { getBitcoinPrice } from '@/lib/binance';
+import { getBitcoinPrice } from '@/lib/coinbase';
 import { COUNTDOWN_SECONDS } from '@/lib/constants';
 
 /**

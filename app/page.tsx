@@ -168,15 +168,17 @@ export default function Home() {
             <div className="space-y-3">
               <div className="text-center mt-12 mb-3">
                 <p className="text-lg text-neon-cyan font-mono tracking-[0.2em]">
-                  &gt; ENTER_BTC_PRICE_PREDICTION
+                  &gt; {priceData?.price ? 'ENTER_BTC_PRICE_PREDICTION' : 'AWAITING_LIVE_PRICE'}
                 </p>
               </div>
-              <GuessForm
-                onSubmit={handleGuess}
-                disabled={!userId || submitGuess.isPending}
-                isLoading={submitGuess.isPending}
-                submittingDirection={submitGuess.isPending ? submitGuess.variables : null}
-              />
+              <div className={!priceData?.price ? 'opacity-50' : ''}>
+                <GuessForm
+                  onSubmit={handleGuess}
+                  disabled={!userId || submitGuess.isPending || !priceData?.price}
+                  isLoading={submitGuess.isPending}
+                  submittingDirection={submitGuess.isPending ? submitGuess.variables : null}
+                />
+              </div>
             </div>
           )}
         </div>
@@ -185,7 +187,7 @@ export default function Home() {
         <footer className="mt-8 text-center text-white/60 text-xs font-mono border-t border-white/20 pt-4">
           <p>[ANONYMOUS_SESSION] • [PERSISTENT_STORAGE]</p>
           <p className="mt-2">
-            &gt; DATA_FEED: Binance_API | REFRESH_RATE: 5s
+            &gt; DATA_FEED: Coinbase_API | REFRESH_RATE: 5s
           </p>
         </footer>
       </div>

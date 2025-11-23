@@ -20,7 +20,7 @@ A real-time game where players predict whether Bitcoin's price will go up or dow
 | State Management | TanStack React Query |
 | Backend | Next.js API Routes |
 | Database | AWS DynamoDB |
-| Price Feed | Binance API |
+| Price Feed | Coinbase API |
 | Hosting | Vercel |
 
 ## Architecture
@@ -37,7 +37,7 @@ Browser                          Vercel (Serverless)              AWS
                                          │ HTTPS
                                          ▼
                                 ┌─────────────────┐
-                                │   Binance API   │
+                                │  Coinbase API   │
                                 │   (BTC price)   │
                                 └─────────────────┘
 ```
@@ -79,7 +79,7 @@ The backend fetches the current BTC price at resolution time and compares it to 
 The frontend polls `/api/price` every 5 seconds to keep the display current. This balances freshness (BTC prices move frequently) against API efficiency.
 
 ### Backend Caching
-The backend caches the Binance response for 5 seconds. This means concurrent requests share the same price data rather than each hitting the external API. The cache also provides a fallback if Binance is temporarily unavailable.
+The backend caches the Coinbase response for 5 seconds. This means concurrent requests share the same price data rather than each hitting the external API. The cache also provides a fallback if Coinbase is temporarily unavailable.
 
 **Note:** The current single-route app doesn't require React Query's `staleTime` configuration. If additional routes or modals that mount/unmount were added, configuring `staleTime` per-query would prevent redundant API calls on component remount.
 
