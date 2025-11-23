@@ -1,26 +1,163 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0a0a0a;
+  --foreground: #00ff41;
+
+  /* Neon color palette */
+  --neon-green: #00ff41;
+  --neon-cyan: #00f0ff;
+  --neon-purple: #8b00ff;
+  --neon-yellow: #ffff00;
+  --neon-red: #ff0055;
+  --neon-orange: #ff8800;
+
+  /* RGB values for rgba usage in animations */
+  --rgb-red: 255, 0, 0;
+  --rgb-green: 0, 255, 0;
+  --rgb-blue: 0, 0, 255;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+
+  /* Neon color palette */
+  --color-neon-green: var(--neon-green);
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-purple: var(--neon-purple);
+  --color-neon-yellow: var(--neon-yellow);
+  --color-neon-red: var(--neon-red);
+  --color-neon-orange: var(--neon-orange);
+
+  /* Font families */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-orbitron: var(--font-orbitron);
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--neon-green);
+  font-family: var(--font-geist-mono), "Courier New", monospace;
+}
+
+/* Glitch text effect */
+.glitch {
+  position: relative;
+  text-shadow:
+    0.05em 0 0 rgba(var(--rgb-red), 0.75),
+    -0.025em -0.05em 0 rgba(var(--rgb-green), 0.75),
+    0.025em 0.05em 0 rgba(var(--rgb-blue), 0.75);
+  animation: glitch 500ms infinite;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow:
+      0.05em 0 0 rgba(var(--rgb-red), 0.75),
+      -0.025em -0.05em 0 rgba(var(--rgb-green), 0.75),
+      0.025em 0.05em 0 rgba(var(--rgb-blue), 0.75);
+  }
+  14% {
+    text-shadow:
+      0.05em 0 0 rgba(var(--rgb-red), 0.75),
+      -0.025em -0.05em 0 rgba(var(--rgb-green), 0.75),
+      0.025em 0.05em 0 rgba(var(--rgb-blue), 0.75);
+  }
+  15% {
+    text-shadow:
+      -0.05em -0.025em 0 rgba(var(--rgb-red), 0.75),
+      0.025em 0.025em 0 rgba(var(--rgb-green), 0.75),
+      -0.05em -0.05em 0 rgba(var(--rgb-blue), 0.75);
+  }
+  49% {
+    text-shadow:
+      -0.05em -0.025em 0 rgba(var(--rgb-red), 0.75),
+      0.025em 0.025em 0 rgba(var(--rgb-green), 0.75),
+      -0.05em -0.05em 0 rgba(var(--rgb-blue), 0.75);
+  }
+  50% {
+    text-shadow:
+      0.025em 0.05em 0 rgba(var(--rgb-red), 0.75),
+      0.05em 0 0 rgba(var(--rgb-green), 0.75),
+      0 -0.05em 0 rgba(var(--rgb-blue), 0.75);
+  }
+  99% {
+    text-shadow:
+      0.025em 0.05em 0 rgba(var(--rgb-red), 0.75),
+      0.05em 0 0 rgba(var(--rgb-green), 0.75),
+      0 -0.05em 0 rgba(var(--rgb-blue), 0.75);
+  }
+  100% {
+    text-shadow:
+      -0.025em 0 0 rgba(var(--rgb-red), 0.75),
+      -0.025em -0.025em 0 rgba(var(--rgb-green), 0.75),
+      -0.025em -0.05em 0 rgba(var(--rgb-blue), 0.75);
+  }
+}
+
+/* Neon glow effect - reduced intensity for better readability */
+.neon-glow {
+  text-shadow:
+    0 0 3.5px currentColor,
+    0 0 7px currentColor,
+    0 0 14px currentColor,
+    0 0 28px currentColor;
+}
+
+/* Cathode ray tube lines effect */
+.crt-lines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* Static gradient text */
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    var(--neon-orange) 0%,
+    var(--neon-cyan) 100%
+  );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Scanline effect */
+@keyframes scanlineMovement {
+  0% {
+    top: -100%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+.scanline::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(to bottom, transparent, currentColor, transparent);
+  opacity: 0.5;
+  animation: scanlineMovement 3s linear infinite;
+  pointer-events: none;
+  z-index: 10;
 }
