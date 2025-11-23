@@ -23,6 +23,7 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^16.0.3",
     "@playwright/test": "^1.56.1",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",

@@ -2,7 +2,7 @@
 
 A real-time game where players predict whether Bitcoin's price will go up or down in the next 60 seconds.
 
-**Live Demo:** [Add Vercel URL here]
+**Live Demo:** https://bitcoin-price-guesser.vercel.app
 
 ## How It Works
 
