@@ -145,7 +145,7 @@ export default function Home() {
                   <div className={predictionPriceClasses}>
                     $
                     {userData.activeGuess.priceAtGuess.toLocaleString('en-US', {
-                      minimumFractionDigits: 2,
+                      minimumFractionDigits: 2, maximumFractionDigits: 2,
                     })}
                   </div>
                 </div>

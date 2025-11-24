@@ -77,7 +77,7 @@ export function ResultDisplay({ resolvedGuess, onDismiss }: ResultDisplayProps) 
                 You predicted: {direction === 'up' ? '▲ UP' : '▼ DOWN'}
               </div>
               <div className="text-2xl font-bold text-neon-cyan font-mono">
-                ${priceAtGuess.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                ${priceAtGuess.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </div>
             </div>
             <div className="text-xl sm:text-3xl text-neon-cyan rotate-90 sm:rotate-0">→</div>
@@ -91,7 +91,7 @@ export function ResultDisplay({ resolvedGuess, onDismiss }: ResultDisplayProps) 
                 Market went: {marketUp ? '▲ UP' : '▼ DOWN'}
               </div>
               <div className="text-2xl font-bold text-neon-cyan font-mono">
-                ${priceAtResolution.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                ${priceAtResolution.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
               </div>
             </div>
           </div>
