@@ -183,18 +183,6 @@ EOF
 npm run dev
 ```
 
-### 4. Deploy to Vercel
-
-1. Push to GitHub
-2. Import project in [Vercel](https://vercel.com)
-3. Add environment variables in Vercel dashboard:
-   - `AWS_REGION`
-   - `AWS_ACCESS_KEY_ID`
-   - `AWS_SECRET_ACCESS_KEY`
-   - `DYNAMODB_USERS_TABLE`
-   - `DYNAMODB_GUESSES_TABLE`
-4. Deploy
-
 ## Testing
 
 ```bash
@@ -210,7 +198,7 @@ npm run test:e2e
 - UI components (GuessForm, CountdownTimer, ResultDisplay, ScoreDisplay, PriceDisplay)
 - Hooks (useCountdown, useSession)
 
-**13 E2E tests** covering:
+**13 E2E tests** (run across Chromium, Firefox, and WebKit) covering:
 
 - Page display and loading states
 - UP/DOWN prediction submission
