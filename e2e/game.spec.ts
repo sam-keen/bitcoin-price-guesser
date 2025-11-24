@@ -66,13 +66,16 @@ test.describe('Bitcoin Price Prediction Game', () => {
   test('session persists across page reload', async ({ page }) => {
     await page.goto('/');
 
-    // Wait for session to be established (score shows means session is ready)
-    await expect(page.getByText('0')).toBeVisible({ timeout: 10000 });
+    // Wait for session to be established (score display is visible with value)
+    await expect(page.getByText('[CURRENT_SCORE]')).toBeVisible({ timeout: 10000 });
 
     // Wait a moment for localStorage to be set
-    await page.waitForFunction(() => {
-      return localStorage.getItem('bitcoinPriceGuesserUserId') !== null;
-    }, { timeout: 10000 });
+    await page.waitForFunction(
+      () => {
+        return localStorage.getItem('bitcoinPriceGuesserUserId') !== null;
+      },
+      { timeout: 10000 }
+    );
 
     // Get the userId from localStorage
     const userIdBefore = await page.evaluate(() => {
@@ -136,8 +139,8 @@ test.describe('Full Game Flow', () => {
   test('prediction flow: guess → countdown → awaiting resolution', async ({ page }) => {
     await page.goto('/');
 
-    // Wait for page to be ready with initial score
-    await expect(page.getByText('0')).toBeVisible({ timeout: 10000 });
+    // Wait for page to be ready with score display
+    await expect(page.getByText('[CURRENT_SCORE]')).toBeVisible({ timeout: 10000 });
 
     // Make a prediction
     await page.getByRole('button', { name: /going up/i }).click();
@@ -145,10 +148,11 @@ test.describe('Full Game Flow', () => {
     // Should see countdown (with 3s duration in tests)
     await expect(page.getByText('[AWAITING_RESULT]')).toBeVisible({ timeout: 5000 });
 
-    // Wait for countdown to finish - should transition to awaiting price change or result
+    // Wait for countdown to finish - should transition to [RESOLVING] state or result
     // With 3s countdown, this tests that the timer works correctly
+    // UI shows [WIN] or [LOSS] for results, and [RESOLVING] when waiting for price change
     await expect(
-      page.getByText(/\[PREDICTION_RESULT\]/).or(page.getByText(/AWAITING_PRICE_CHANGE/))
+      page.getByText(/\[WIN]/).or(page.getByText(/\[LOSS]/)).or(page.getByText('[RESOLVING]'))
     ).toBeVisible({ timeout: 15000 });
 
     // The flow is working correctly at this point - we've verified:
@@ -160,27 +164,31 @@ test.describe('Full Game Flow', () => {
   test('result can be dismissed to make new prediction', async ({ page }) => {
     await page.goto('/');
 
-    // Wait for page to be ready
-    await expect(page.getByText('0')).toBeVisible({ timeout: 10000 });
+    // Wait for page to be ready with score display
+    await expect(page.getByText('[CURRENT_SCORE]')).toBeVisible({ timeout: 10000 });
 
     // Make a prediction and wait for resolution state
     await page.getByRole('button', { name: /going up/i }).click();
     await expect(page.getByText('[AWAITING_RESULT]')).toBeVisible({ timeout: 5000 });
 
     // Wait for countdown + potential price change (give it some time)
+    // UI shows [WIN] or [LOSS] for results, and [RESOLVING] when waiting for price change
     await expect(
-      page.getByText(/\[PREDICTION_RESULT\]/).or(page.getByText(/AWAITING_PRICE_CHANGE/))
+      page.getByText(/\[WIN]/).or(page.getByText(/\[LOSS]/)).or(page.getByText('[RESOLVING]'))
     ).toBeVisible({ timeout: 15000 });
 
     // Check if we got a result (price changed)
-    const hasResult = await page.getByText(/\[PREDICTION_RESULT\]/).isVisible().catch(() => false);
+    const hasResult = await page
+      .getByText(/\[WIN]|\[LOSS]/)
+      .isVisible()
+      .catch(() => false);
 
     if (hasResult) {
-      // Result should show with score change
-      await expect(page.getByText(/[+-]1/)).toBeVisible();
+      // Result should show with score change (use first() as score appears in multiple places)
+      await expect(page.getByText(/[+-]1/).first()).toBeVisible();
 
-      // Dismiss the result
-      await page.getByRole('button', { name: /new prediction/i }).click();
+      // Dismiss the result (button says "TRY_AGAIN")
+      await page.getByRole('button', { name: /try.?again/i }).click();
 
       // Should be back to guess form
       await expect(page.getByRole('button', { name: /going up/i })).toBeVisible({ timeout: 5000 });

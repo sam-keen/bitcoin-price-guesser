@@ -11,7 +11,7 @@ export function ScoreDisplay({ score, isLoading }: ScoreDisplayProps) {
 
   const containerClasses = classNames(
     'bg-black border-3 border-neon-orange p-4',
-    'text-center shadow-xl relative overflow-hidden',
+    'text-center shadow-xl relative overflow-hidden'
   );
 
   const scoreClasses = classNames(
@@ -30,9 +30,7 @@ export function ScoreDisplay({ score, isLoading }: ScoreDisplayProps) {
         <div className="text-xs uppercase tracking-[0.3em] mb-1.5 text-neon-cyan font-mono">
           [CURRENT_SCORE]
         </div>
-        <div className={scoreClasses}>
-          {isLoading ? '...' : score > 0 ? `+${score}` : score}
-        </div>
+        <div className={scoreClasses}>{isLoading ? '...' : score > 0 ? `+${score}` : score}</div>
       </div>
     </div>
   );

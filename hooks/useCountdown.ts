@@ -7,11 +7,7 @@ import { useEffect, useState } from 'react';
  * Counts seconds remaining from a start time
  * Calls onDone when countdown reaches 0
  */
-export function useCountdown(
-  startTime: number | null,
-  totalSeconds: number,
-  onDone: () => void
-) {
+export function useCountdown(startTime: number | null, totalSeconds: number, onDone: () => void) {
   const [secondsRemaining, setSecondsRemaining] = useState<number>(totalSeconds);
 
   useEffect(() => {
@@ -24,6 +20,7 @@ export function useCountdown(
     const elapsed = (now - startTime) / 1000;
     const remaining = Math.max(0, totalSeconds - elapsed);
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Initial calculation on mount
     setSecondsRemaining(Math.ceil(remaining));
 
     if (remaining <= 0) {

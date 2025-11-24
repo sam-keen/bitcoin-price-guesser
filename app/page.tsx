@@ -19,11 +19,7 @@ export default function Home() {
   const queryClient = useQueryClient();
   const { userId, isLoading: sessionLoading } = useSession();
   const { data: priceData, isLoading: priceLoading } = usePrice();
-  const {
-    data: userData,
-    isLoading: userLoading,
-    refetch: refetchUser,
-  } = useUser(userId);
+  const { data: userData, isLoading: userLoading, refetch: refetchUser } = useUser(userId);
   const submitGuess = useSubmitGuess(userId);
 
   // Countdown timer logic
@@ -86,10 +82,11 @@ export default function Home() {
     'text-neon-green neon-glow font-mono'
   );
 
-  const getDirectionTextClasses = (direction: 'up' | 'down') => classNames({
-    'text-neon-green': direction === 'up',
-    'text-neon-red': direction === 'down',
-  });
+  const getDirectionTextClasses = (direction: 'up' | 'down') =>
+    classNames({
+      'text-neon-green': direction === 'up',
+      'text-neon-red': direction === 'down',
+    });
 
   return (
     <div className="min-h-screen bg-black text-neon-green relative overflow-hidden">
@@ -98,7 +95,10 @@ export default function Home() {
 
       <div className="container mx-auto px-4 py-6 max-w-5xl relative z-10">
         <header className="text-center mb-8 border border-neon-cyan/30 p-5 bg-black/80">
-          <h1 className="text-5xl font-black mb-2 flex items-center justify-center gap-3" style={{ fontFamily: 'var(--font-orbitron)' }}>
+          <h1
+            className="text-5xl font-black mb-2 flex items-center justify-center gap-3"
+            style={{ fontFamily: 'var(--font-orbitron)' }}
+          >
             <svg
               viewBox="0 0 32 32"
               className="w-8 min-w-8 h-8 sm:w-10 sm:min-w-10 sm:h-10"
@@ -143,7 +143,10 @@ export default function Home() {
                     </span>
                   </div>
                   <div className={predictionPriceClasses}>
-                    ${userData.activeGuess.priceAtGuess.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                    $
+                    {userData.activeGuess.priceAtGuess.toLocaleString('en-US', {
+                      minimumFractionDigits: 2,
+                    })}
                   </div>
                 </div>
               </div>
@@ -157,10 +160,7 @@ export default function Home() {
 
           {/* Resolved Guess Result */}
           {userData?.resolvedGuess && (
-            <ResultDisplay
-              resolvedGuess={userData.resolvedGuess}
-              onDismiss={handleDismissResult}
-            />
+            <ResultDisplay resolvedGuess={userData.resolvedGuess} onDismiss={handleDismissResult} />
           )}
 
           {/* Guess Form - Only show if no active guess and no resolved guess to display */}
@@ -168,7 +168,14 @@ export default function Home() {
             <div className="space-y-3">
               <div className="text-center mt-12 mb-4">
                 <p className="text-lg text-neon-cyan font-mono tracking-[0.2em]">
-                  &gt; {priceData?.price ? <>ENTER <span className="-mx-3">_BTC_</span> PRICE_PREDICTION</> : 'AWAITING_LIVE_PRICE'}
+                  &gt;{' '}
+                  {priceData?.price ? (
+                    <>
+                      ENTER <span className="-mx-3">_BTC_</span> PRICE_PREDICTION
+                    </>
+                  ) : (
+                    'AWAITING_LIVE_PRICE'
+                  )}
                 </p>
               </div>
               <div className={!priceData?.price ? 'opacity-50' : ''}>
@@ -186,9 +193,7 @@ export default function Home() {
         {/* Footer */}
         <footer className="mt-8 text-center text-white/60 text-xs font-mono border-t border-white/20 pt-4">
           <p>[ANONYMOUS_SESSION] • [PERSISTENT_STORAGE]</p>
-          <p className="mt-2">
-            &gt; DATA_FEED: Coinbase_API | REFRESH_RATE: 5s
-          </p>
+          <p className="mt-2">&gt; DATA_FEED: Coinbase_API | REFRESH_RATE: 5s</p>
         </footer>
       </div>
     </div>

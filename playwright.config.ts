@@ -46,7 +46,8 @@ export default defineConfig({
   webServer: {
     command: 'npm run dev',
     url: 'http://localhost:3000',
-    reuseExistingServer: !process.env.CI,
+    // Always start fresh server to ensure NEXT_PUBLIC_COUNTDOWN_SECONDS=3 is applied
+    reuseExistingServer: false,
     timeout: 120000,
     env: {
       // Use 3-second countdown for E2E tests

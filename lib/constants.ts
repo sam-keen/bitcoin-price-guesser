@@ -6,7 +6,4 @@
  * Default: 60 seconds
  * For E2E tests: Set NEXT_PUBLIC_COUNTDOWN_SECONDS=3
  */
-export const COUNTDOWN_SECONDS = parseInt(
-  process.env.NEXT_PUBLIC_COUNTDOWN_SECONDS || '60',
-  10
-);
+export const COUNTDOWN_SECONDS = parseInt(process.env.NEXT_PUBLIC_COUNTDOWN_SECONDS || '60', 10);

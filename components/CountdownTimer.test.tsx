@@ -12,15 +12,15 @@ describe('CountdownTimer', () => {
   it('displays resolving state when secondsRemaining is 0', () => {
     render(<CountdownTimer secondsRemaining={0} />);
 
-    expect(screen.getByText('[RESOLVING_POSITION]')).toBeInTheDocument();
-    expect(screen.getByText(/AWAITING_PRICE_CHANGE/)).toBeInTheDocument();
+    expect(screen.getByText('[RESOLVING]')).toBeInTheDocument();
+    expect(screen.getByText(/AWAITING/)).toBeInTheDocument();
     expect(screen.queryByText('0s')).not.toBeInTheDocument();
   });
 
   it('displays resolving state when secondsRemaining is negative', () => {
     render(<CountdownTimer secondsRemaining={-5} />);
 
-    expect(screen.getByText('[RESOLVING_POSITION]')).toBeInTheDocument();
+    expect(screen.getByText('[RESOLVING]')).toBeInTheDocument();
   });
 
   it('calculates progress correctly at start (60s remaining)', () => {

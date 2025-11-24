@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #0a0a0a;
@@ -39,7 +39,7 @@
 body {
   background: var(--background);
   color: var(--neon-green);
-  font-family: var(--font-geist-mono), "Courier New", monospace;
+  font-family: var(--font-geist-mono), 'Courier New', monospace;
 }
 
 /* Glitch text effect */
@@ -108,7 +108,7 @@ body {
 
 /* Cathode ray tube lines effect */
 .crt-lines::before {
-  content: "";
+  content: '';
   position: absolute;
   top: 0;
   left: 0;
@@ -127,11 +127,7 @@ body {
 
 /* Static gradient text */
 .gradient-text {
-  background: linear-gradient(
-    135deg,
-    var(--neon-orange) 0%,
-    var(--neon-cyan) 100%
-  );
+  background: linear-gradient(135deg, var(--neon-orange) 0%, var(--neon-cyan) 100%);
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
@@ -149,7 +145,7 @@ body {
 }
 
 .scanline::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -100%;
   left: 0;

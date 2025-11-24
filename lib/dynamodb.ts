@@ -137,7 +137,7 @@ export async function updateGuess(
 ): Promise<void> {
   const updateExpressions: string[] = [];
   const expressionAttributeNames: Record<string, string> = {};
-  const expressionAttributeValues: Record<string, any> = {};
+  const expressionAttributeValues: Record<string, string | number | boolean | null> = {};
 
   if (updates.status !== undefined) {
     updateExpressions.push('#status = :status');
@@ -170,9 +170,7 @@ export async function updateGuess(
       Key: { guessId },
       UpdateExpression: `SET ${updateExpressions.join(', ')}`,
       ExpressionAttributeNames:
-        Object.keys(expressionAttributeNames).length > 0
-          ? expressionAttributeNames
-          : undefined,
+        Object.keys(expressionAttributeNames).length > 0 ? expressionAttributeNames : undefined,
       ExpressionAttributeValues: expressionAttributeValues,
     })
   );
@@ -181,10 +179,7 @@ export async function updateGuess(
 /**
  * Update user's score and lastActivity
  */
-export async function updateUserScore(
-  userId: string,
-  scoreChange: number
-): Promise<void> {
+export async function updateUserScore(userId: string, scoreChange: number): Promise<void> {
   const now = Date.now();
 
   await docClient.send(
@@ -222,10 +217,7 @@ export async function clearUserActiveGuess(userId: string): Promise<void> {
 /**
  * Set user's activeGuessId and update lastActivity
  */
-export async function setUserActiveGuess(
-  userId: string,
-  guessId: string
-): Promise<void> {
+export async function setUserActiveGuess(userId: string, guessId: string): Promise<void> {
   const now = Date.now();
 
   await docClient.send(

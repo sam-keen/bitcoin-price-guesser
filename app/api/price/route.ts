@@ -16,9 +16,6 @@ export async function GET() {
     });
   } catch (error) {
     console.error('Error fetching Bitcoin price:', error);
-    return NextResponse.json(
-      { error: 'Failed to fetch Bitcoin price' },
-      { status: 503 }
-    );
+    return NextResponse.json({ error: 'Failed to fetch Bitcoin price' }, { status: 503 });
   }
 }

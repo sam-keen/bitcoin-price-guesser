@@ -35,10 +35,7 @@ export async function GET(request: NextRequest) {
     const user = await getUser(userId);
 
     if (!user) {
-      return NextResponse.json(
-        { error: 'User not found' },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     // If no active guess, return user data
@@ -125,8 +122,7 @@ export async function GET(request: NextRequest) {
     // Price changed - resolve the guess
     const priceWentUp = currentPrice > guess.priceAtGuess;
     const won =
-      (guess.direction === 'up' && priceWentUp) ||
-      (guess.direction === 'down' && !priceWentUp);
+      (guess.direction === 'up' && priceWentUp) || (guess.direction === 'down' && !priceWentUp);
 
     const scoreChange = won ? 1 : -1;
 
@@ -158,9 +154,6 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error in /api/user:', error);
-    return NextResponse.json(
-      { error: 'Internal server error' },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
   }
 }

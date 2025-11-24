@@ -27,7 +27,7 @@ export async function getBitcoinPrice(): Promise<PriceData> {
   try {
     const response = await fetch(COINBASE_API, {
       headers: {
-        'Accept': 'application/json',
+        Accept: 'application/json',
       },
     });
 

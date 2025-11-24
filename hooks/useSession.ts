@@ -19,6 +19,7 @@ export function useSession() {
   // Load userId from localStorage on mount
   useEffect(() => {
     const storedUserId = localStorage.getItem('bitcoinPriceGuesserUserId');
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Hydrating from localStorage on mount
     setUserId(storedUserId);
     setIsInitialised(true);
   }, []);

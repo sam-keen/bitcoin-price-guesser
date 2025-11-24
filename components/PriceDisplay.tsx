@@ -42,7 +42,9 @@ export function PriceDisplay({ price, isLoading }: PriceDisplayProps) {
           {isLoading ? (
             <span className="text-neon-cyan/50 glitch">loading...</span>
           ) : price !== undefined ? (
-            <span className="text-neon-cyan neon-glow">${price.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+            <span className="text-neon-cyan neon-glow">
+              ${price.toLocaleString('en-US', { minimumFractionDigits: 2 })}
+            </span>
           ) : (
             <span className="text-neon-cyan/50">--</span>
           )}

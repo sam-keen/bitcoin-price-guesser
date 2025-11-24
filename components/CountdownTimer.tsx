@@ -10,7 +10,10 @@ export function CountdownTimer({ secondsRemaining }: CountdownTimerProps) {
 
   // Progress from 0% (COUNTDOWN_SECONDS remaining) to 100% (0s remaining)
   const totalDuration = COUNTDOWN_SECONDS;
-  const progress = Math.min(100, Math.max(0, ((totalDuration - secondsRemaining) / totalDuration) * 100));
+  const progress = Math.min(
+    100,
+    Math.max(0, ((totalDuration - secondsRemaining) / totalDuration) * 100)
+  );
 
   const containerClasses = classNames(
     'bg-black border-3 border-neon-yellow p-4',
@@ -23,24 +26,18 @@ export function CountdownTimer({ secondsRemaining }: CountdownTimerProps) {
     'font-bold text-neon-yellow font-mono'
   );
 
-  const footerClasses = classNames(
-    'text-sm mt-2 text-neon-yellow/80 font-mono'
-  );
+  const footerClasses = classNames('text-sm mt-2 text-neon-yellow/80 font-mono');
 
   if (isResolving) {
     return (
       <div className={containerClasses}>
         <div className="absolute inset-0 bg-gradient-to-br from-neon-yellow/20 to-neon-orange/20"></div>
         <div className="relative z-10">
-          <div className={headerClasses}>
-            [RESOLVING]
-          </div>
+          <div className={headerClasses}>[RESOLVING]</div>
           <div className="text-3xl font-bold text-neon-yellow font-mono glitch">
             ⏳ AWAITING <span className="-mx-4">_PRICE_</span> CHANGE
           </div>
-          <div className={footerClasses}>
-            &gt; Waiting for market movement...
-          </div>
+          <div className={footerClasses}>&gt; Waiting for market movement...</div>
         </div>
       </div>
     );
@@ -55,9 +52,7 @@ export function CountdownTimer({ secondsRemaining }: CountdownTimerProps) {
       />
       <div className="absolute inset-0 bg-gradient-to-br from-neon-yellow/10 to-transparent"></div>
       <div className="relative z-10">
-        <div className={headerClasses}>
-          [AWAITING_RESULT]
-        </div>
+        <div className={headerClasses}>[AWAITING_RESULT]</div>
         <div className="text-7xl font-bold text-neon-yellow font-mono neon-glow">
           {secondsRemaining}s
         </div>
