@@ -50,7 +50,7 @@ export function ResultDisplay({ resolvedGuess, onDismiss }: ResultDisplayProps) 
   );
 
   const summaryBoxClasses = classNames(
-    'w-full max-w-lg mx-auto bg-black/60 border-2 border-neon-cyan/30 p-3 mb-4'
+    'w-full max-w-sm sm:max-w-lg mx-auto bg-black/60 border-2 border-neon-cyan/30 p-3 mb-4'
   );
 
   const buttonClasses = classNames(
@@ -81,7 +81,7 @@ export function ResultDisplay({ resolvedGuess, onDismiss }: ResultDisplayProps) 
         </div>
 
         <div className={summaryBoxClasses}>
-          <div className="flex justify-between items-center m-2">
+          <div className="flex flex-col sm:flex-row justify-between items-center gap-2 m-2">
             <div>
               <div className={classNames('text-xs font-mono mb-1', {
                 'text-neon-green': direction === 'up',
@@ -93,7 +93,7 @@ export function ResultDisplay({ resolvedGuess, onDismiss }: ResultDisplayProps) 
                 ${priceAtGuess.toLocaleString('en-US', { minimumFractionDigits: 2 })}
               </div>
             </div>
-            <div className="text-3xl text-neon-cyan">→</div>
+            <div className="text-xl sm:text-3xl text-neon-cyan rotate-90 sm:rotate-0">→</div>
             <div>
               <div className={classNames('text-xs font-mono mb-1', {
                 'text-neon-green': marketUp,

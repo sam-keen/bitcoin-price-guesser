@@ -101,7 +101,7 @@ export default function Home() {
           <h1 className="text-5xl font-black mb-2 flex items-center justify-center gap-3" style={{ fontFamily: 'var(--font-orbitron)' }}>
             <svg
               viewBox="0 0 32 32"
-              className="w-12 h-12"
+              className="w-8 min-w-8 h-8 sm:w-10 sm:min-w-10 sm:h-10"
               aria-label="Bitcoin"
             >
               <circle cx="16" cy="16" r="16" className="fill-neon-orange" />
@@ -113,7 +113,7 @@ export default function Home() {
             <span className="gradient-text tracking-[0.1em]">PREDICT</span>
           </h1>
           <p className="text-neon-cyan text-base font-mono tracking-[0.2em]">
-            &gt; PREDICT_BTC_PRICE_MOVEMENT
+            &gt; PREDICT <span className="-mx-3">_BTC_</span> PRICE_MOVEMENT
           </p>
         </header>
 
@@ -166,9 +166,9 @@ export default function Home() {
           {/* Guess Form - Only show if no active guess and no resolved guess to display */}
           {!userData?.activeGuess && !userData?.resolvedGuess && (
             <div className="space-y-3">
-              <div className="text-center mt-12 mb-3">
+              <div className="text-center mt-12 mb-4">
                 <p className="text-lg text-neon-cyan font-mono tracking-[0.2em]">
-                  &gt; {priceData?.price ? 'ENTER_BTC_PRICE_PREDICTION' : 'AWAITING_LIVE_PRICE'}
+                  &gt; {priceData?.price ? <>ENTER <span className="-mx-3">_BTC_</span> PRICE_PREDICTION</> : 'AWAITING_LIVE_PRICE'}
                 </p>
               </div>
               <div className={!priceData?.price ? 'opacity-50' : ''}>

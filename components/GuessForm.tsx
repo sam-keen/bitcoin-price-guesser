@@ -9,7 +9,7 @@ interface GuessFormProps {
 
 export function GuessForm({ onSubmit, disabled, isLoading, submittingDirection }: GuessFormProps) {
   const baseButtonClasses = classNames(
-    'bg-black/90 border-2 font-bold py-3 px-12 text-2xl',
+    'bg-black/90 border-2 font-bold py-3 px-12 text-xl sm:text-2xl',
     'transition-all flex flex-col items-center justify-center font-mono',
     'relative overflow-hidden group cursor-pointer',
     'rounded-3xl hover:scale-105 hover:bg-black'
@@ -51,7 +51,7 @@ export function GuessForm({ onSubmit, disabled, isLoading, submittingDirection }
           <span className="tracking-wider relative z-10 text-lg">submitting...</span>
         ) : (
           <>
-            <span className="text-lg relative z-10">▲</span>
+            <span className="relative z-10 text-base">▲</span>
             <span className="tracking-wider relative z-10">GOING UP</span>
           </>
         )}
@@ -66,7 +66,7 @@ export function GuessForm({ onSubmit, disabled, isLoading, submittingDirection }
           <span className="tracking-wider relative z-10 text-lg">submitting...</span>
         ) : (
           <>
-            <span className="text-lg relative z-10">▼</span>
+            <span className="relative z-10 text-base">▼</span>
             <span className="tracking-wider relative z-10">GOING DOWN</span>
           </>
         )}

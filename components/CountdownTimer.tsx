@@ -33,10 +33,10 @@ export function CountdownTimer({ secondsRemaining }: CountdownTimerProps) {
         <div className="absolute inset-0 bg-gradient-to-br from-neon-yellow/20 to-neon-orange/20"></div>
         <div className="relative z-10">
           <div className={headerClasses}>
-            [RESOLVING_POSITION]
+            [RESOLVING]
           </div>
-          <div className="text-4xl font-bold text-neon-yellow font-mono glitch">
-            ⏳ AWAITING_PRICE_CHANGE
+          <div className="text-3xl font-bold text-neon-yellow font-mono glitch">
+            ⏳ AWAITING <span className="-mx-4">_PRICE_</span> CHANGE
           </div>
           <div className={footerClasses}>
             &gt; Waiting for market movement...
@@ -50,7 +50,7 @@ export function CountdownTimer({ secondsRemaining }: CountdownTimerProps) {
     <div className={containerClasses}>
       {/* Progress bar that fills from left to right as time runs out */}
       <div
-        className="absolute inset-y-0 left-0 bg-gradient-to-r from-transparent to-neon-yellow/25 transition-[width] duration-1000 ease-linear"
+        className="absolute inset-y-0 left-0 bg-gradient-to-r from-transparent to-neon-yellow/25 transition-[width] duration-200 ease-linear"
         style={{ width: `${progress}%` }}
       />
       <div className="absolute inset-0 bg-gradient-to-br from-neon-yellow/10 to-transparent"></div>
